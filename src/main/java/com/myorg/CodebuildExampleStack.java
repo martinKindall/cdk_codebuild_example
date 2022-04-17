@@ -24,6 +24,10 @@ public class CodebuildExampleStack extends Stack {
                 .build());
 
         var build = Project.Builder.create(this, "MyProject")
+                .environment(BuildEnvironment.builder()
+                        .computeType(ComputeType.SMALL)
+                        .buildImage(LinuxBuildImage.fromCodeBuildImageId("aws/codebuild/standard:5.0"))
+                        .build())
                 .source(gitHubSource)
                 .build();
     }

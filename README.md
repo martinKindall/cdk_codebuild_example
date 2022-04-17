@@ -1,18 +1,23 @@
-# Welcome to your CDK Java project!
+# Setting up a CodeBuild pipeline with the CDK
 
-This is a blank project for Java development with CDK.
+Available CodeBuild images [here](https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html).
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+Available runtimes and their corresponding
+images [here](https://docs.aws.amazon.com/codebuild/latest/userguide/available-runtimes.html).
 
-It is a [Maven](https://maven.apache.org/) based project, so you can open this project with any Maven compatible Java IDE to build and run tests.
+### Run CodeBuild locally
 
-## Useful commands
+Follow the instructions [here](https://docs.aws.amazon.com/codebuild/latest/userguide/use-codebuild-agent.html) to run
+it locally. You may have to use the following command in oder to be able to download the image from ECR:
 
- * `mvn package`     compile and run tests
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
+```bash
+aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/codebuild/<SELECTED-IMAGE>
+```
 
-Enjoy!
+As image you could use the Ubuntu 20.04 (aws/codebuild/standard:5.0) or else, depending on the runtime you need.
+
+Finally to run CodeBuild locally:
+
+```bash
+./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a build_output
+```
