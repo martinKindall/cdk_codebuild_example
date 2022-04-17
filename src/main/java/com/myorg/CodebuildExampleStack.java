@@ -20,7 +20,7 @@ public class CodebuildExampleStack extends Stack {
                 .owner("martinKindall")
                 .repo("java_codebuild")
                 .webhook(true)
-                .webhookFilters(List.of(FilterGroup.inEventOf(EventAction.PUSH).andBranchIs("main")))
+                .webhookFilters(List.of(FilterGroup.inEventOf(EventAction.PUSH).andBranchIs("main").andCommitMessageIs(".*version.*")))
                 .build());
 
         var build = Project.Builder.create(this, "MyProject")
