@@ -19,5 +19,5 @@ As image you could use the Ubuntu 20.04 (aws/codebuild/standard:5.0) or else, de
 Finally to run CodeBuild locally:
 
 ```bash
-./codebuild_build.sh -i public.ecr.aws/codebuild/amazonlinux2-x86_64-standard:3.0 -a build_output
+./codebuild_build.sh -i public.ecr.aws/codebuild/<SELECTED-IMAGE>:<TAG> -a build_output
 ```
