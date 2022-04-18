@@ -1,7 +1,6 @@
 package com.myorg;
 
 import software.amazon.awscdk.services.codebuild.*;
-import software.amazon.awscdk.services.iam.AnyPrincipal;
 import software.amazon.awscdk.services.iam.Effect;
 import software.amazon.awscdk.services.iam.PolicyStatement;
 import software.constructs.Construct;
@@ -37,13 +36,16 @@ public class CodebuildExampleStack extends Stack {
 
         PolicyStatement policyStatement = PolicyStatement.Builder.create()
                 .actions(List.of(
-                        "ecr:BatchCheckLayerAvailability",
-                        "ecr:CompleteLayerUpload",
-                        "ecr:GetAuthorizationToken",
-                        "ecr:InitiateLayerUpload",
-                        "ecr:PutImage",
-                        "ecr:UploadLayerPart",
+                        "ecr-public:CompleteLayerUpload",
+                        "ecr-public:InitiateLayerUpload",
+                        "ecr-public:PutImage",
+                        "ecr-public:UploadLayerPart",
                         "ecr-public:GetAuthorizationToken",
+                        "ecr-public:BatchCheckLayerAvailability",
+                        "ecr:GetAuthorizationToken",
+                        "ecr:BatchGetImage",
+                        "ecr:BatchCheckLayerAvailability",
+                        "ecr:GetDownloadUrlForLayer",
                         "sts:GetServiceBearerToken"
                 ))
                 .resources(List.of("*"))
