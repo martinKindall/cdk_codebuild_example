@@ -30,6 +30,7 @@ public class CodebuildExampleStack extends Stack {
                 .environment(BuildEnvironment.builder()
                         .computeType(ComputeType.SMALL)
                         .buildImage(LinuxBuildImage.fromCodeBuildImageId("aws/codebuild/standard:5.0"))
+                        .privileged(true)
                         .build())
                 .source(gitHubSource)
                 .build();
@@ -41,7 +42,9 @@ public class CodebuildExampleStack extends Stack {
                         "ecr:GetAuthorizationToken",
                         "ecr:InitiateLayerUpload",
                         "ecr:PutImage",
-                        "ecr:UploadLayerPart"
+                        "ecr:UploadLayerPart",
+                        "ecr-public:GetAuthorizationToken",
+                        "sts:GetServiceBearerToken"
                 ))
                 .resources(List.of("*"))
                 .effect(Effect.ALLOW)
