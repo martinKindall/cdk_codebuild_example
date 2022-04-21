@@ -22,7 +22,10 @@ public class CodebuildExampleStack extends Stack {
                 .owner("martinKindall")
                 .repo("aws_spring_cloud_sandbox")
                 .webhook(true)
-                .webhookFilters(List.of(FilterGroup.inEventOf(EventAction.PUSH).andBranchIs("main").andCommitMessageIs(".*version.*")))
+                .webhookFilters(List.of(
+                        FilterGroup.inEventOf(EventAction.PULL_REQUEST_MERGED).andBaseBranchIs("main"),
+                        FilterGroup.inEventOf(EventAction.PULL_REQUEST_CREATED)
+                ))
                 .build());
 
         var build = Project.Builder.create(this, "MyProject")
